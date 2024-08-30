@@ -1,7 +1,7 @@
 package com.javaday.maroto_stock.config.error
 
 
-import com.javaday.maroto_stock.models.dtos.FieldValidationError
+import com.fasterxml.jackson.annotation.JsonProperty
 import com.javaday.maroto_stock.models.enums.ServiceError
 import org.springframework.context.ApplicationContext
 import org.springframework.context.ApplicationContextAware
@@ -33,6 +33,24 @@ class GlobalFieldExceptionHandler : ApplicationContextAware {
     override fun setApplicationContext(applicationContext: ApplicationContext) { }
 
 }
+
+data class FieldValidationError(
+    @JsonProperty("timestamp")
+    val timestamp: Long,
+
+    @JsonProperty("status")
+    val status: Int,
+
+    @JsonProperty("error")
+    val error: String,
+
+    @JsonProperty("message")
+    val message: String,
+
+    @JsonProperty("fieldErrors")
+    val fieldErrors: Map<String, String>
+)
+
 
 
 
